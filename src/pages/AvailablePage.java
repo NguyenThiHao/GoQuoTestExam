@@ -1,7 +1,9 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 /**
  * Function of Available Page
@@ -14,6 +16,8 @@ public class AvailablePage {
 	private String checkin = "//span[contains(text(), 'Ngày xuất phát')]";
 	private String checkout = "//span[contains(text(), 'Ngày về')]";
 	private String expectedTitle = "Tìm vé trực tuyến | Công Ty TNHH PN Việt Nam";
+	private String departCity = "//p[@id='deplocation']//span[1]";
+	private String returnCity = "//p[@id='deplocation']//span[2]";
 	
 	/**
 	 * Verify Available page opens or not
@@ -122,5 +126,33 @@ public class AvailablePage {
 		System.out.println("Verify Checkin is selectdate or not");
 		String attribute = Common.driver.findElement(By.xpath(strXpath)).getAttribute("class");
 		Assert.assertEquals(attribute, "selectdate");
+	}
+	
+	/**
+	 * Verify Depart City
+	 * @param departCity
+	 */
+	public boolean verifyDepartCity(String departCity){
+		String departCityFullText = Common.driver.findElement(By.xpath(this.departCity)).getText();
+		return departCityFullText.contains(departCity);
+	}
+	
+	/**
+	 * Verify Return City
+	 * @param returnCity
+	 */
+	public boolean verifyReturnCity(String returnCity){
+		String returnCityFullText = Common.driver.findElement(By.xpath(this.returnCity)).getText();
+		return returnCityFullText.contains(returnCity);
+	}
+	
+	/**
+	 * Verify location displayed correct or not
+	 * @param departCity
+	 * @param returnCity
+	 */
+	public void verifyLocation(String departCity, String returnCity){
+		Assert.assertEquals(verifyDepartCity(departCity), true);
+		Assert.assertEquals(verifyReturnCity(returnCity), true);
 	}
 }

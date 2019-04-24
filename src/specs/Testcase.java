@@ -9,7 +9,11 @@ import pages.AvailablePage;
 import pages.CmdSearchPage;
 import pages.Common;
 
-
+/**
+ * 
+ * @author HAO
+ *
+ */
 public class Testcase {
 	@BeforeTest
 	public void BeforeTest(){
@@ -45,6 +49,7 @@ public class Testcase {
 		availablePage.verifyTotalPassengers(totalAdults, totalChilds);
 		Assert.assertEquals(availablePage.verifyCheckin(checkinMonth, checkinDay), true);
 		Assert.assertEquals(availablePage.verifyCheckout(checkoutMonth, checkoutDay), true);
+		availablePage.verifyLocation(departCity, returnCity);
 		availablePage.verifyCheckinIsSelectDate(checkinMonth, checkinDay);	
 	}
 	
